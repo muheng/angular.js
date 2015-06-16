@@ -1,0 +1,48 @@
+<!document html>
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>Yerel Test</title>
+    <script src="../../build/angular.js"></script>
+    <!-- not needed, already bundled in angular.js
+      <script src="../../build/i18n/angular-locale_en.js"></script>
+    -->
+    <script>
+      function AppCntl($scope){
+        $scope.input = 234234443432;
+        $scope.plInput = 1;
+        $scope.person1 = "Muharrem";
+        $scope.person2 = "Filiz";
+        $scope.plInput2 = 1;
+      }
+    </script>
+  </head>
+  <body ng-controller="AppCntl">
+    <h3>Tarih/Sayı/Para Birimi filtreleri örneği</h3>
+    <input type="text" ng-model="input" value="234234443432"><br>
+    date(medium): {{input | date:"medium"}}<br>
+    date(longDate): {{input | date:"longDate"}}<br>
+    number: {{input | number}}<br>
+    currency: {{input | currency }}
+    <hr/>
+    <h3>Pluralization demo:</h3>
+    <input type="text" ng-model="plInput"><br>
+    <ng-pluralize count="plInput"
+                  when= "{ '0': 'Mailiniz yok!',
+                           'one': 'Bir mailiniz var!',
+                           'other': '{} mailiniz var!'}">
+    </ng-pluralize>
+    <hr/>
+    <h3>Pluralization demo with offsets:</h3>
+    Name of person1:<input type="text" ng-model="person1"/><br/>
+    Name of person2:<input type="text" ng-model="person2"/><br/>
+    <input type="text" ng-model="plInput2"><br>
+    <ng-pluralize count="plInput2" offset=2
+                  when= "{'0':'Kimse izlemiyor!',
+                          '1': '{{person1}} izliyor!',
+                          '2': '{{person1}} ve {{person2}} izliyorlar!',
+                          '3': '{{person1}}, {{person2}} ve bir kişi izliyorlar!',
+                          'other': '{{person1}}, {{person2}} ve {} kişi izliyorlar!'}">
+    </ng-pluralize>
+  </body>
+</html>
